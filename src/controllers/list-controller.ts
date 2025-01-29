@@ -36,13 +36,16 @@ export class ListController {
 
   async index(req: Request, res: Response, next: NextFunction) {
     try {
-      const allItems = await prisma.list.findMany()
+      const listItems = await prisma.list.findMany()
 
-      if (allItems.length === 0) {
+      // const { search } = req.query
+      // console.log(search)
+
+      if (listItems.length === 0) {
         throw new AppError('No items found', 404)
       }
 
-      res.status(200).json(allItems)
+      res.status(200).json(listItems)
     } catch (error) {
       next(error)
     }
